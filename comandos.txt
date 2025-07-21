@@ -1,0 +1,40 @@
+# Comandos utilizados para instalación y configuración de Apache en Google Cloud Shell
+
+# Actualizar el sistema
+sudo apt-get update
+
+# Instalar Apache
+sudo apt-get install apache2 -y
+
+# Iniciar Apache manualmente (en caso de error al instalar)
+sudo service apache2 start
+
+# Verificar que Apache está corriendo
+sudo service apache2 status
+
+# Editar configuración del sitio por defecto
+sudo nano /etc/apache2/sites-available/000-default.conf
+
+# Crear directorio del sitio
+sudo mkdir /var/www/html/mi_sitio
+
+# Crear archivo index.html de prueba
+echo "<h1>Hola desde mi sitio en Apache</h1>" | sudo tee /var/www/html/mi_sitio/index.html
+
+# Reiniciar Apache
+sudo service apache2 restart
+
+# Obtener URL para previsualizar sitio en la nube
+cloudshell get-web-preview-url --port=80
+
+# Editar configuración para habilitar AllowOverride
+sudo nano /etc/apache2/apache2.conf
+
+# Crear archivo .htaccess
+sudo nano /var/www/html/mi_sitio/.htaccess
+
+# Habilitar módulo rewrite
+sudo a2enmod rewrite
+
+# Reiniciar Apache nuevamente
+sudo service apache2 restart
